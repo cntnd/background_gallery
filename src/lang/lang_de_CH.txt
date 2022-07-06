@@ -1,1 +1,7 @@
-MODULE=Modul name
+MODULE=Background Gallery
+SELECT_CHOOSE=-bitte wählen-
+GALLERY=Galerie-Ordner:
+SORT=Sortierung
+SORT_ASC=Aufsteigend (A > Z)
+SORT_DESC=Absteigend (Z > A)
+DELAY=Verzögerung

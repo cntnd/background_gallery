@@ -1,11 +1,32 @@
-<!-- cntnd_html/template/default.html -->
-{if $truncate}
-<div class="truncate" id="truncate-{$uuid}">
-{/if}
-{$text}
-{if $truncate}
-</div>
-<a target="{$uuid}" class="read-more">Mehr</a>
-<a target="{$uuid}" class="read-less" style="display: none;">Schliessen</a>
-{/if}
-<!-- cntnd_html/template/default.html -->
+<!-- cntnd_background_gallery/template/default.html -->
+<script>
+    $(function () {
+        var pictures = [];
+        {foreach from = $pictures item = foto}
+        pictures.push("{$foto}");
+        {/foreach}
+
+        var loop = 0;
+
+        var looper = function () {
+            <!-- has to be adpated to the correct container -->
+            $('.background_gallery').fadeOut(250, function () {
+                $('.background_gallery').css("background-image", 'url(' + pictures[loop] + ')');
+                $('.background_gallery').fadeIn(250);
+            })
+
+            if (loop < pictures.length - 1) {
+                loop++;
+            } else {
+                loop = 0;
+            }
+
+            setTimeout(looper, {$delay});
+        };
+
+        if (pictures.length>1) {
+            looper();
+        }
+    });
+</script>
+<!-- cntnd_background_gallery/template/default.html -->
