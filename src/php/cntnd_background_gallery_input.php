@@ -31,7 +31,7 @@ $cntndInput = new Cntnd\BackgroundGallery\CntndBackgroundGalleryInput($lang, $cl
                 if ($selectedDir == $folder) {
                     $selected = 'selected="selected"';
                 }
-                echo '<option value="' . $folder . '" ' . $selected . '>' . $folder . '</opt.ion>';
+                echo '<option value="' . $folder . '" ' . $selected . '>' . $folder . '</option>';
             }
             ?>
         </select>
