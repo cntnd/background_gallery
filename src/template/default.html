@@ -1,32 +1,69 @@
 <!-- cntnd_background_gallery/template/default.html -->
+<!-- 
+add these CSS lines to your .bg CSS class:
+
+  -webkit-transition: background-image 0.5s ease-in-out;
+  transition: background-image 0.5s ease-in-out;
+-->
 <script>
-    $(function () {
-        var pictures = [];
-        {foreach from = $pictures item = foto}
-        pictures.push("{$foto}");
-        {/foreach}
+$(function() {
+    var pictures = [];
+    {foreach from = $pictures item = foto}
+    pictures.push("{$foto}");
+    {/foreach}
 
-        var loop = 0;
+    // preload
+    function preload() {
+        pictures.forEach(image => {
+            new Image().src = image
+        });
+    }
 
-        var looper = function () {
-            <!-- has to be adpated to the correct container -->
-            $('.background_gallery').fadeOut(250, function () {
-                $('.background_gallery').css("background-image", 'url(' + pictures[loop] + ')');
-                $('.background_gallery').fadeIn(250);
-            })
+    // shuffle
+    pictures = shuffle(pictures);
 
-            if (loop < pictures.length - 1) {
-                loop++;
-            } else {
-                loop = 0;
-            }
+    var loop = 0;
 
-            setTimeout(looper, {$delay});
-        };
+    var looper = function() {
+        <
+        !--has to be adpated to the correct container-- >
+        $('.bg').fadeIn(250, function() {
+            $('.bg').css("background-image", 'url(' + pictures[loop] + ')');
+        });
 
-        if (pictures.length>1) {
-            looper();
+        if (loop < pictures.length - 1) {
+            loop++;
+        } else {
+            loop = 0;
         }
-    });
+
+        setTimeout(looper, {$delay});
+    };
+
+    if (pictures.length > 1) {
+        preload();
+        looper();
+    }
+
+    function shuffle(array) {
+        let currentIndex = array.length,
+            randomIndex;
+
+        // While there remain elements to shuffle.
+        while (currentIndex != 0) {
+
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]
+            ];
+        }
+
+        return array;
+    }
+});
 </script>
 <!-- cntnd_background_gallery/template/default.html -->
