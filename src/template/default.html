@@ -1,16 +1,21 @@
 <!-- cntnd_background_gallery/template/default.html -->
-<!-- 
-add these CSS lines to your .bg CSS class:
-
-  -webkit-transition: background-image 0.5s ease-in-out;
-  transition: background-image 0.5s ease-in-out;
--->
 <script>
 $(function() {
     var pictures = [];
     {foreach from = $pictures item = foto}
     pictures.push("{$foto}");
     {/foreach}
+
+    // shuffle
+    pictures = shuffle(pictures);
+
+    // preload
+    preload();
+
+    $(".bg").bgswitcher({
+        images: pictures,
+        interval: {$delay}
+    });
 
     // preload
     function preload() {
@@ -19,30 +24,6 @@ $(function() {
         });
     }
 
-    // shuffle
-    pictures = shuffle(pictures);
-
-    var loop = 0;
-
-    var looper = function() {
-        <!--has to be adpated to the correct container-- >
-        $('.bg').fadeIn(250, function() {
-            $('.bg').css("background-image", 'url(' + pictures[loop] + ')');
-        });
-
-        if (loop < pictures.length - 1) {
-            loop++;
-        } else {
-            loop = 0;
-        }
-
-        setTimeout(looper, {$delay});
-    };
-
-    if (pictures.length > 1) {
-        preload();
-        looper();
-    }
 
     function shuffle(array) {
         let currentIndex = array.length,

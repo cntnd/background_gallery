@@ -1,6 +1,6 @@
 {
   "name": "cntnd_background_gallery",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Background Image Gallery",
   "devDependencies": {
     "del": "^5.1.0",
