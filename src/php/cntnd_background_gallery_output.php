@@ -22,8 +22,10 @@ $cntndOutput = new Cntnd\BackgroundGallery\CntndBackgroundGalleryOutput($idart, 
 $cntndOutput->load();
 
 // module
-$tpl = cSmartyFrontend::getInstance();
-$tpl->assign('delay', $cntndOutput->delay());
-$tpl->assign('pictures', $cntndOutput->images());
-$tpl->display("default.html");
+if (!$editmode) {
+    $tpl = cSmartyFrontend::getInstance();
+    $tpl->assign('delay', $cntndOutput->delay());
+    $tpl->assign('pictures', $cntndOutput->images());
+    $tpl->display("default.html");
+}
 ?>
